@@ -8,6 +8,7 @@ else if (args.Length == 1 && args[0].Contains("all", StringComparison.CurrentCul
     {
         opt.ShowConstructorElapsedTime = true;
         opt.ShowTotalElapsedTimePerDay = true;
+        opt.ClearConsole = true;
     });
 }
 else
