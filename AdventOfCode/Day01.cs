@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 public sealed class Day01 : BaseDay
 {
     private readonly string[] _input;
-    private readonly Regex _first = new("^[^0-9]*([0-9])");
-    private readonly Regex _last = new("([0-9])[^0-9]*$");
+    private readonly Regex _first = new("^[^\\d]*([\\d])");
+    private readonly Regex _last = new("([\\d])[^\\d]*$");
     private readonly Regex _firstWords  ;
     private readonly Regex _lastWords;
-    private readonly Dictionary<string, int> _numerals;
+    private readonly IDictionary<string, int> _numerals;
 
     public Day01()
     {
@@ -28,7 +28,7 @@ public sealed class Day01 : BaseDay
             { "nine", 9 },
         };
 
-        for (int i = 0; i <= 9; i++)
+        for (var i = 0; i <= 9; i++)
         {
             _numerals.Add(i.ToString(), i);
         }
@@ -53,7 +53,7 @@ public sealed class Day01 : BaseDay
     {
         var result = _input.Sum(line => int.Parse($"{FirstDigit(line)}" + $"{LastDigit(line)}"));
 
-        return new($"Solution for {ClassPrefix} {CalculateIndex()} is {result}");
+        return new ValueTask<string>($"Solution for {ClassPrefix} {CalculateIndex()} is {result}");
     }
 
     private string LastDigit(string line)
@@ -72,6 +72,6 @@ public sealed class Day01 : BaseDay
             .Select(t => new { t, val2 = _numerals[_lastWords.Match(t.line).Groups[1].Value] })
             .Select(t => int.Parse($"{t.t.val1}{t.val2}"))).Sum();
 
-        return new($"Solution for {ClassPrefix} {CalculateIndex()} is {result}");
+        return new ValueTask<string>($"Solution for {ClassPrefix} {CalculateIndex()} is {result}");
     }
 }
