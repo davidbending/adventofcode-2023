@@ -38,29 +38,16 @@ public sealed class Day02 : BaseDay
     public override ValueTask<string> Solve_2()
     {
         var lines = _input.Split("\r\n");
-        var games = new List<Game>();
+        var total = 0;
 
         foreach (var line in lines)
         {
-            games.Add(ParseLineMin(line));
-        }
-
-        return games;
-
-        var total = 0;
-
-        foreach (var game in games)
-        {
-            total += PowerMin(game);
+            total+=ParseLineMin(line);
         }
 
         return new ValueTask<string>(total.ToString());
     }
 
-    private int PowerMin(Game game)
-    {
-      
-    }
 
     private Game ParseLineMax(string line)
     {
@@ -107,7 +94,7 @@ public sealed class Day02 : BaseDay
             game.Blue = hands.Max(h => h.Blue);
         }
 
-        return game.Red*game.Green*game.Blue
+        return game.Red * game.Green * game.Blue;
     }
 
 }
